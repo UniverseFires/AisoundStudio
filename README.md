@@ -47,23 +47,3 @@ AI 音频处理目前要求受支持的 NVIDIA 显卡和驱动。当前引擎下
 voice-models.com 是社区目录，不是 RVC 官方模型库。上传者的授权、模型质量和安全性未由本项目核实。模型文件不随源码或安装包分发；只下载并使用你信任且有权使用的模型。目录网站没有稳定的官方搜索 API，程序使用其公开网页当前使用的查询端点；如果网站改版，搜索可能暂时不可用。
 
 本仓库的 MIT 许可只覆盖本项目代码，不自动覆盖 RVC、Python、PyTorch、其他运行时组件或下载的音色模型；它们各自适用的许可由其上游项目或上传者决定。
-
-## 构建 Windows 安装包
-
-需要 Windows、.NET 10 SDK 和 Inno Setup 编译器（`ISCC.exe`）。运行：
-
-```powershell
-.\build-installer.ps1
-```
-
-安装程序输出到 `artifacts\AisoundStudio-Setup.exe`。构建脚本只从 `source` 项目发布，不会读取或复制外部音色、记录或导出文件夹。推送到 `main` 后，GitHub Actions 会构建、测试并提供工作流产物。要更新现有 `v1.0.0` 安装程序附件，提交信息需包含 `[replace-v1.0.0]`；其他普通提交不会改动 Release。
-
-## 项目结构
-
-```text
-source/                  WPF 桌面程序和 Python bridge
-source/backend/          AI 环境安装与模型准备脚本
-installer/               Inno Setup 安装器定义与语言文件
-build-installer.ps1      Windows 发布与安装包构建入口
-```
-
