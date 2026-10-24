@@ -30,17 +30,17 @@ Uninstallable=yes
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "chinesesimp"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
+Name: "chinesesimplified"; MessagesFile: "ChineseSimplified.isl"
 
 [CustomMessages]
 english.AppName=Aisound Studio
-chinesesimp.AppName=声屿 · Aisound Studio
+chinesesimplified.AppName=声屿 · Aisound Studio
 english.ShortcutGroup=Shortcuts:
-chinesesimp.ShortcutGroup=快捷方式：
+chinesesimplified.ShortcutGroup=快捷方式：
 english.DesktopIcon=Create a desktop shortcut
-chinesesimp.DesktopIcon=创建桌面快捷方式
+chinesesimplified.DesktopIcon=创建桌面快捷方式
 english.LaunchApp=Launch Aisound Studio
-chinesesimp.LaunchApp=启动声屿 · Aisound Studio
+chinesesimplified.LaunchApp=启动声屿 · Aisound Studio
 
 [Files]
 Source: "{#PublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb"
