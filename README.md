@@ -6,7 +6,7 @@ Windows 桌面音频工具，提供人声分离、音色训练与转换、翻唱
 
 发布后的 Windows 安装程序会显示在 [Releases](https://github.com/UniverseFires/AisoundStudio/releases) 页面。每次发布版本后，GitHub Actions 会自动构建安装包并检查安装和启动；检查通过后，将 `AisoundStudio-Setup.exe` 附到该版本。
 
-当前仓库还没有首个已发布版本。发布后，在 Releases 页面下载 `AisoundStudio-Setup.exe`，双击并按提示安装。
+在 Releases 页面下载 `AisoundStudio-Setup.exe`，双击启动安装。安装开始时可选择简体中文或 English，随后可以选择安装目录；默认位置为 `%LOCALAPPDATA%\Programs\AisoundStudio`。
 
 > 作者是开源新手，项目仍在持续学习和完善。欢迎大家提问、指出问题或给予建议，我会认真记录并逐步改进。
 
@@ -25,7 +25,7 @@ Windows 桌面音频工具，提供人声分离、音色训练与转换、翻唱
 - AI 环境默认为软件目录下的 `AIEnvironment` 子文件夹。用户可以在下载确认框或设置页更改位置。
 - 卸载程序不会主动删除用户创建的 AI 环境、音色和记录文件。
 
-安装器按当前用户安装到 `%LOCALAPPDATA%\Programs\AisoundStudio`，不要求管理员权限。这样默认的 AI 环境子文件夹可写。
+安装器默认按当前用户安装到 `%LOCALAPPDATA%\Programs\AisoundStudio`，不要求管理员权限；安装时可以更改目录。这样默认的 AI 环境子文件夹可写。
 
 ## AI 环境下载
 
@@ -47,3 +47,5 @@ AI 音频处理目前要求受支持的 NVIDIA 显卡和驱动。当前引擎下
 voice-models.com 是社区目录，不是 RVC 官方模型库。上传者的授权、模型质量和安全性未由本项目核实。模型文件不随源码或安装包分发；只下载并使用你信任且有权使用的模型。目录网站没有稳定的官方搜索 API，程序使用其公开网页当前使用的查询端点；如果网站改版，搜索可能暂时不可用。
 
 本仓库的 MIT 许可只覆盖本项目代码，不自动覆盖 RVC、Python、PyTorch、其他运行时组件或下载的音色模型；它们各自适用的许可由其上游项目或上传者决定。
+
+
