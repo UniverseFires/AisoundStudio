@@ -1,0 +1,29 @@
+name: Windows installer
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Install Inno Setup
+        shell: powershell
+        run: choco install innosetup --yes --no-progress
+      - name: Build installer
+        shell: powershell
+        run: .\build-installer.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AisoundStudio-Windows-Installer
+          path: artifacts/AisoundStudio-Setup.exe
+          if-no-files-found: error

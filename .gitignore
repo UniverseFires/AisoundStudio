@@ -1,0 +1,27 @@
+# Local application data and downloaded model files
+data/
+voices/
+exports/
+datasets/
+downloads/
+AIEnvironment/
+temp/
+
+# Build output and local tooling
+artifacts/
+**/bin/
+**/obj/
+**/__pycache__/
+**/*.py[cod]
+.dotnet-home/
+.nuget/
+.venv/
+venv/
+
+# Logs and local editor files
+*.log
+*.user
+*.suo
+*.bak
+.vs/
+.idea/
