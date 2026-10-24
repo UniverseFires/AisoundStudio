@@ -22,6 +22,24 @@ jobs:
       - name: Build installer
         shell: powershell
         run: .\build-installer.ps1
+      - name: Install and smoke-test app
+        shell: powershell
+        run: |
+          $installDir = Join-Path $env:RUNNER_TEMP 'AisoundStudio-smoke-install'
+          $renderDir = Join-Path $env:RUNNER_TEMP 'AisoundStudio-smoke-render'
+          $installer = Join-Path $env:GITHUB_WORKSPACE 'artifacts\AisoundStudio-Setup.exe'
+          $install = Start-Process -FilePath $installer -ArgumentList @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', "/DIR=$installDir") -WindowStyle Hidden -Wait -PassThru
+          if ($install.ExitCode -ne 0) { throw "Installer exited with code $($install.ExitCode)." }
+          $app = Join-Path $installDir 'AisoundStudio.exe'
+          if (!(Test-Path -LiteralPath $app)) { throw 'Installer did not place AisoundStudio.exe in the target directory.' }
+          $launch = Start-Process -FilePath $app -ArgumentList @('--render-dir', $renderDir) -WindowStyle Hidden -Wait -PassThru
+          if ($launch.ExitCode -ne 0) { throw "Installed app exited with code $($launch.ExitCode)." }
+          $statusPath = Join-Path $renderDir 'render-status.json'
+          if (!(Test-Path -LiteralPath $statusPath)) { throw 'Installed app did not finish UI rendering.' }
+          $status = Get-Content -LiteralPath $statusPath -Raw | ConvertFrom-Json
+          $screenshots = @(Get-ChildItem -LiteralPath $renderDir -Filter '*.png')
+          if ($status.status -ne 'passed' -or $screenshots.Count -ne $status.pages -or $status.pages -lt 6) { throw 'Installed app UI smoke test did not render every page.' }
+          if (Test-Path -LiteralPath (Join-Path $installDir 'data\validation-error.txt')) { throw 'Installed app reported a UI validation error.' }
       - uses: actions/upload-artifact@v4
         with:
           name: AisoundStudio-Windows-Installer

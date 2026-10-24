@@ -58,7 +58,7 @@ public partial class MainWindow
                     bitmap.Render(visual); var encoder=new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap));
                     using var file=File.Create(Path.Combine(args[render+1],key+".png")); encoder.Save(file);
                 }
-                File.WriteAllText(Path.Combine(args[render+1],"render-status.json"),"{\"pages\":6,\"status\":\"passed\"}");
+                File.WriteAllText(Path.Combine(args[render+1],"render-status.json"),JsonSerializer.Serialize(new { pages=pages.Count,status="passed" },jsonOptions));
             }
         }
         catch(Exception e)
