@@ -49,7 +49,7 @@ jobs:
           if-no-files-found: error
 
   publish-release:
-    if: github.event_name == 'release'
+    if: github.event_name == 'release' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[replace-v1.0.0]'))
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -61,6 +61,7 @@ jobs:
           path: artifacts
       - uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event.release.tag_name }}
+          tag_name: ${{ github.event_name == 'release' && github.event.release.tag_name || 'v1.0.0' }}
           files: artifacts/AisoundStudio-Setup.exe
           fail_on_unmatched_files: true
+          overwrite_files: true

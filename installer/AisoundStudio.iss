@@ -5,7 +5,7 @@
 [Setup]
 AppId={{61B3069C-9D4E-4B20-83F6-C3D41800C74C}
 AppName={cm:AppName}
-AppVersion=1.0.1
+AppVersion=1.0.0
 AppPublisher=AisoundStudio contributors
 DefaultDirName={localappdata}\Programs\AisoundStudio
 DisableDirPage=no
@@ -54,4 +54,3 @@ Name: "desktopicon"; Description: "{cm:DesktopIcon}"; GroupDescription: "{cm:Sho
 
 [Run]
 Filename: "{app}\AisoundStudio.exe"; Description: "{cm:LaunchApp}"; Flags: postinstall nowait skipifsilent
-

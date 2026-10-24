@@ -4,7 +4,7 @@ Windows 桌面音频工具，提供人声分离、音色训练与转换、翻唱
 
 ## 下载与安装
 
-发布后的 Windows 安装程序会显示在 [Releases](https://github.com/UniverseFires/AisoundStudio/releases) 页面。每次发布版本后，GitHub Actions 会自动构建安装包并检查安装和启动；检查通过后，将 `AisoundStudio-Setup.exe` 附到该版本。
+Windows 安装程序会显示在 [Releases](https://github.com/UniverseFires/AisoundStudio/releases) 页面。GitHub Actions 会构建安装包并检查安装和启动；检查通过后，发布版本时会将 `AisoundStudio-Setup.exe` 附到该版本。
 
 在 Releases 页面下载 `AisoundStudio-Setup.exe`，双击启动安装。安装开始时可选择简体中文或 English，随后可以选择安装目录；默认位置为 `%LOCALAPPDATA%\Programs\AisoundStudio`。
 
@@ -48,4 +48,22 @@ voice-models.com 是社区目录，不是 RVC 官方模型库。上传者的授�
 
 本仓库的 MIT 许可只覆盖本项目代码，不自动覆盖 RVC、Python、PyTorch、其他运行时组件或下载的音色模型；它们各自适用的许可由其上游项目或上传者决定。
 
+## 构建 Windows 安装包
+
+需要 Windows、.NET 10 SDK 和 Inno Setup 编译器（`ISCC.exe`）。运行：
+
+```powershell
+.\build-installer.ps1
+```
+
+安装程序输出到 `artifacts\AisoundStudio-Setup.exe`。构建脚本只从 `source` 项目发布，不会读取或复制外部音色、记录或导出文件夹。推送到 `main` 后，GitHub Actions 会构建、测试并提供工作流产物。要更新现有 `v1.0.0` 安装程序附件，提交信息需包含 `[replace-v1.0.0]`；其他普通提交不会改动 Release。
+
+## 项目结构
+
+```text
+source/                  WPF 桌面程序和 Python bridge
+source/backend/          AI 环境安装与模型准备脚本
+installer/               Inno Setup 安装器定义与语言文件
+build-installer.ps1      Windows 发布与安装包构建入口
+```
 
